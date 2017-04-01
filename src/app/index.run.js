@@ -1,5 +1,10 @@
-(function() {
+﻿(function() {
   'use strict';
+
+  window.categories = [
+      'Զինված ուժեր',
+      'Ընտրություններ'
+  ]
 
   angular
     .module('newsScraperRc')

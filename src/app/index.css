@@ -1,4 +1,4 @@
-.browsehappy {
+﻿.browsehappy {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
@@ -11,4 +11,26 @@
 
 .thumbnail img.pull-right {
   width: 50px;
+}
+
+.ui-grid-menu-button {
+  display: none;
+}
+
+.article-title {
+  padding: 5px;
+}
+
+.service-modal-form label {
+  width: 150px;
+}
+
+.service-modal-form .block {
+  margin-top: 10px;
+}
+
+.service-modal-form input,
+.service-modal-form select {
+  width: 100%;
+  padding: 3px;
 }

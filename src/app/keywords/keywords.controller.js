@@ -1,4 +1,4 @@
-
+﻿
 
 
 (function() {
@@ -33,24 +33,17 @@
     vm.entity = angular.copy(row.entity);
     vm.save = save;
     function save() {
-      if (row.entity.id == '0') {
-        console.log(row.entity);
-        row.entity = angular.extend(row.entity, vm.entity);
-        $http.post('http://mserver:8082/api/keywords', row.entity).success(function(response) { $uibModalInstance.close(row.entity);
+        if (row.entity.id == '0') {
+            row.entity = angular.extend(row.entity, vm.entity);
+        $http.post('http://localhost:12135/api/keywords', row.entity).success(function(response) { $uibModalInstance.close(row.entity);
           console.log(response);
           grid.data.push(response)})
           .error(function(response) { alert('Cannot edit row (error in console)'); console.dir(response); });
-        //row.entity = angular.extend(row.entity, vm.entity);
-        //real ID come back from response after the save in DB
-        //row.entity.id = Math.floor(100 + Math.random() * 1000);
-
-        //grid.data.push(row.entity);
 
       } else {
         row.entity = angular.extend(row.entity, vm.entity);
-        /*
-         * $http.post('http://localhost:8080/service/save', row.entity).success(function(response) { $uibModalInstance.close(row.entity); }).error(function(response) { alert('Cannot edit row (error in console)'); console.dir(response); });
-         */
+        $http.post('http://localhost:12135/api/keywords', row.entity).success(function(response) { $uibModalInstance.close(row.entity); }).error(function(response) { alert('Cannot edit row (error in console)'); console.dir(response); });
+        
       }
       $uibModalInstance.close(row.entity);
     }
@@ -81,57 +74,49 @@
     var vm = this;
 
     vm.editRow = RowEditor.editRow;
-
+    $scope.status = ['Զինված ուժեր', 'Ընտրություններ'];
     vm.serviceGrid = {
       enableRowSelection : true,
       enableRowHeaderSelection : false,
-      multiSelect : false,
+      multiSelect: false,
+      gridMenuShowHideColumns: false,
+      enableColumnMenus: false,
       enableSorting : true,
       enableFiltering : true,
       enableGridMenu : true,
       rowTemplate : "<div ng-dblclick=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
     };
 
-    vm.serviceGrid.columnDefs = [ {
-      field : 'id',
-      displayName : 'Id',
-      enableSorting : true,
-      type : 'number',
-      enableCellEdit : false,
-      width : 60,
-      sort : {
-        direction : uiGridConstants.ASC,
-        priority : 1
-      }
-    }, {
-      field : 'category',
+    vm.serviceGrid.columnDefs = [{
+        field: 'keyword',
+        displayName: 'Բանալի',
       enableSorting : true,
       enableCellEdit : false
     }, {
-      field : 'keyword',
-      enableSorting : true,
-      enableCellEdit : false
-    },
+            field: 'category',
+            displayName: 'Կատեգորիա',
+        enableSorting: true,
+        enableCellEdit: false,
+        cellTemplate: '<div>{{COL_FIELD == 1 ? "Զինված ուժեր" : "Ընտրություններ"}}</div>'
+    }, 
       {
-        field : 'author',
+          field: 'author',
+          displayName: 'Հեղինակ',
         enableSorting : true,
         enableCellEdit : false
       }
     ];
 
-    vm.serviceGrid.data = {};
-
     $http.get('http://mserver:8082/api/keywords').success(function(response) {
-      console.log(response);
       vm.serviceGrid.data = response;
     });
 
     $scope.addRow = function() {
-      var newService = {
-        "id" : "0",
-        "category" : "military",
-        "keyword" : "test",
-        "author" : "MTDC"
+        var newService = {
+          "id": "0",
+        "category" : 1,
+        "keyword" : "",
+        "author" : ""
       };
       var rowTmp = {};
       rowTmp.entity = newService;

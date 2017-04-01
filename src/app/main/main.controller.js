@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
   'use strict';
 
   angular
@@ -12,33 +12,26 @@
 
     vm.serviceGrid = {
       enableRowSelection : true,
-      enableRowHeaderSelection : false,
-      multiSelect : false,
+      enableRowHeaderSelection: false,
+      enableColumnMenus: false,
+      gridMenuShowHideColumns: false,
+      multiSelect: false,
       enableSorting : true,
       enableFiltering : true,
       enableGridMenu : true
     };
 
-    vm.serviceGrid.columnDefs = [ {
-      field : 'id',
-      displayName : 'Id',
+    vm.serviceGrid.columnDefs = [{
+      field: 'title',
+      displayName: 'Վերնագիրը',
       enableSorting : true,
-      type : 'number',
-      enableCellEdit : false,
-      width : 60,
-      sort : {
-        direction : uiGridConstants.ASC,
-        priority : 1
-      }
+      enableCellEdit: false
     }, {
-      field : 'title',
-      enableSorting : true,
-      enableCellEdit : false
-    }, {
-      field : 'url',
-      enableSorting : true,
-      enableCellEdit : false,
-      cellTemplate:  '<a target="_blank" href="{{row.entity.url}}">{{row.entity.url}}</a>'
+        field: 'url',
+        displayName: 'Հղում',
+        enableSorting: true,
+        enableCellEdit: false,
+        cellTemplate: '<div class="article-title"><a target="_blank" href="{{row.entity.url}}">{{row.entity.url}}</a></div>'
     }
     ];
 

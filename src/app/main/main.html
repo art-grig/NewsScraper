@@ -1,0 +1,20 @@
+<div class="row">
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+  <legend>
+    News list
+  </legend>
+  <br />
+  <div id="serviceGrid"
+       ui-grid-move-columns
+       ui-grid-selection
+       ui-grid-resize-columns
+
+       ui-grid-pinning
+       ui-grid-exporter
+       ui-grid-auto-resize
+
+       ui-grid-edit
+       ui-grid="vm.serviceGrid" class="influxGrid"></div>
+</div>

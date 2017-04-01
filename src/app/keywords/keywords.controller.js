@@ -83,11 +83,19 @@
       enableColumnMenus: false,
       enableSorting : true,
       enableFiltering : true,
-      enableGridMenu : true,
+      enableGridMenu: true,
       rowTemplate : "<div ng-dblclick=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
     };
 
     vm.serviceGrid.columnDefs = [{
+        field: 'index',
+        displayName: '#',
+        enableSorting: false,
+        enableFiltering: false,
+        enableCellEdit: false,
+        width: 50,
+        cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row) + 1}}</div>'
+    },{
         field: 'keyword',
         displayName: 'Բանալի',
       enableSorting : true,
@@ -107,7 +115,7 @@
       }
     ];
 
-    $http.get('http://mserver:8082/api/keywords').success(function(response) {
+    $http.get('http://mserver:8082/api/keywords').success(function (response) {
       vm.serviceGrid.data = response;
     });
 

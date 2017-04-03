@@ -16,5 +16,10 @@
        ui-grid-auto-resize
 
        ui-grid-edit
-       ui-grid="vm.serviceGrid" class="influxGrid"></div>
+       ui-grid="vm.serviceGrid" class="influxGrid" external-scopes="gridScope">
+    <div class="well grid-loading" ng-show="grid.rows.length == 0">
+      <img src="loading.svg"/>
+      <strong>Բեռնում...</strong>
+    </div>
+  </div>
 </div>

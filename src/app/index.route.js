@@ -15,7 +15,7 @@
         controllerAs: 'vm'
       })
       .state('keywords', {
-        url: '/',
+        url: '/keywords',
         templateUrl: 'app/keywords/keywords.html',
         controller: 'KeywordsController',
         controllerAs: 'vm'
